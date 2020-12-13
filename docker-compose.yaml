@@ -13,7 +13,6 @@ services:
       - POSTGRES_DB=graphdb
     volumes:
       - graphdb:/var/lib/postgresql/data
-      - ./initdb:/docker-entrypoint-initdb.d
     networks:
       - graph-starter
 

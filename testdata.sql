@@ -1,6 +1,5 @@
-set -e
-psql -U graph graph << EOSQL
 CREATE SCHEMA business AUTHORIZATION graph;
+
 CREATE TABLE business.country (
 	id int4 NOT NULL,
 	"name" text NULL,
@@ -8,6 +7,7 @@ CREATE TABLE business.country (
 	continent text NULL,
 	CONSTRAINT country_pk PRIMARY KEY (id)
 );
+
 INSERT INTO business.country (id,"name",alpha3,continent)
 	VALUES (10,'Antarctica','ATA','南極');
 INSERT INTO business.country (id,"name",alpha3,continent)
@@ -38,6 +38,7 @@ INSERT INTO business.country (id,"name",alpha3,continent)
 	VALUES (262,'Djibouti','DJI','東アフリカ');
 INSERT INTO business.country (id,"name",alpha3,continent)
 	VALUES (702,'Singapore','SGP','東南アジア');
+
 CREATE TABLE business.city (
 	id int4 NOT NULL,
 	"name" text NULL,
@@ -46,6 +47,7 @@ CREATE TABLE business.city (
 	CONSTRAINT city_pk PRIMARY KEY (id),
 	CONSTRAINT city_fk FOREIGN KEY (country_id) REFERENCES business.country(id)
 );
+
 INSERT INTO business.city (id,"name",population,country_id)
 	VALUES (1,'Niigata',505272,392);
 INSERT INTO business.city (id,"name",population,country_id)
@@ -68,4 +70,3 @@ INSERT INTO business.city (id,"name",population,country_id)
 	VALUES (10,'Taipei',7871900,158);
 INSERT INTO business.city (id,"name",population,country_id)
 	VALUES (11,'Kaohsiung',1519711,158);
-EOSQL
