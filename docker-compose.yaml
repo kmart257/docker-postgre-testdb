@@ -1,0 +1,22 @@
+version: "3.3"
+networks:
+  graph-starter:
+services:
+  postgresql:
+    restart: always
+    image: postgres:12.2-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=graph
+      - POSTGRES_PASSWORD=graph
+      - POSTGRES_DB=graphdb
+    volumes:
+      - graphdb:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+    networks:
+      - graph-starter
+
+volumes:
+  graphdb:
+    external: true
